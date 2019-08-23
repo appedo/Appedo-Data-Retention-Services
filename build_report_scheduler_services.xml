@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<project name="Appedo-Report-Scheduler-Services" default="report_scheduler_services">
+	<path id="libpath">
+		 <fileset dir="lib">
+			<include name="**/*.jar"/>
+		 </fileset>
+	</path> 
+	
+	<target name="init">
+		<property name="src_dir" value="src/"/>
+		<property name="classes" value="appedo_temp/report_scheduler_services/classes"/>
+	</target>		
+	
+	<target name="prepare" depends="init">
+		<mkdir dir="${classes}"/>
+	</target>
+	
+	<target name="compile" depends="prepare">
+		<javac srcdir="src" destdir="${classes}" debug="true" includeantruntime="false">
+			 <classpath refid="libpath"/>
+		</javac>
+	</target>
+	
+	<target name="report_scheduler_services" depends="compile">
+		<jar jarfile="${jars}/appedo_report_scheduler_services_${1}.jar" manifest="META-INF/MANIFEST_REPORT_SCHEDULER_SERVICES.MF">
+			<fileset dir="${classes}"/>
+		</jar>
+	</target>
+</project>

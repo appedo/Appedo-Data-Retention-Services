@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Title: Appedo Report-Scheduled-Email-Alert Services
+Specification-Version: 3.0
+Specification-Vendor: Appedo Inc.
+Implementation-Title: Appedo Report-Scheduled-Email-Alert Services
+Implementation-Version: 007
+Implementation-Vendor: Appedo Inc.
+VersionLastUpdate: 2018-09-26 13:30
+Main-Class: com.appedo.retention.main.ReportSchedulerEmailAlertMain
+Class-Path: lib/appedo-commons-1.038.jar lib/aws-java-sdk-1.1.7.1.jar lib/commons-beanutils-1.7.jar lib/commons-collections.jar lib/commons-dbcp2-2.1.1.jar lib/commons-lang.jar lib/commons-logging-1.2.jar lib/commons-pool2-2.4.2.jar lib/ezmorph.jar lib/gson-2.2.4.jar lib/json-lib-2.2.2-jdk15.jar lib/log4j-1.2.15.jar lib/mail.jar lib/postgresql-42.1.1.jre7.jar lib/sendwithus-java-client-1.6.0.jar

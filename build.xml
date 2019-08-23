@@ -1,0 +1,95 @@
+<project name="Appedo_retention_jar" default="package">
+	<target name="init">
+		<property name="build_aggregation_services_xml" value="build_aggregation_services.xml"/>
+		<property name="build_retention_services_xml" value="build_retention_services.xml"/>
+		<property name="build_sla_alert_services_xml" value="build_sla_alert_services.xml"/>
+		<property name="build_report_scheduler_services_xml" value="build_report_scheduler_services.xml"/>
+		
+		<property name="jars" value="appedo_temp/jars"/>
+		<property name="aggregation_jar" value="appedo_temp/appedo_data_aggregation_${1}"/>
+		<property name="retention_jar" value="appedo_temp/appedo_data_retention_${1}"/>
+		<property name="sla_alert_services" value="appedo_temp/appedo_sla_alert_services_${1}"/>
+		<property name="report_scheduler_services" value="appedo_temp/appedo_report_scheduler_services_${1}"/>
+	</target>
+	
+	<target name="clean" depends="init">
+			<delete dir="appedo_temp"/>
+	</target>
+	
+	<target name="prepare" depends="clean">
+		<mkdir dir="${jars}"/>
+		
+		<mkdir dir="${aggregation_jar}"/>
+		<mkdir dir="${aggregation_jar}/lib"/>
+		<mkdir dir="${aggregation_jar}/logs"/>
+		
+		<mkdir dir="${retention_jar}"/>
+		<mkdir dir="${retention_jar}/email"/>
+		<mkdir dir="${retention_jar}/lib"/>
+		<mkdir dir="${retention_jar}/logs"/>
+		
+		<mkdir dir="${sla_alert_services}"/>
+		<mkdir dir="${sla_alert_services}/lib"/>
+		<mkdir dir="${sla_alert_services}/logs"/>
+		
+		<mkdir dir="${report_scheduler_services}"/>
+		<mkdir dir="${report_scheduler_services}/lib"/>
+		<mkdir dir="${report_scheduler_services}/logs"/>		
+	</target>
+	
+	<target name="jar" depends="prepare">
+		<ant antfile="${build_aggregation_services_xml}" target="aggregation_services"/>
+		<ant antfile="${build_retention_services_xml}" target="retention_services"/>
+		<ant antfile="${build_sla_alert_services_xml}" target="sla_alert_services"/>
+		<ant antfile="${build_report_scheduler_services_xml}" target="report_scheduler_services"/>
+	</target>
+	
+	<target name="package" depends="jar">
+		<copy file="config.properties" todir="${aggregation_jar}"/>
+		<copy file="log4j.properties" todir="${aggregation_jar}"/>
+		<copy todir="${aggregation_jar}/lib">
+			<fileset dir="lib"/>
+		</copy>
+		<mkdir dir="${aggregation_jar}/logs"/>
+		<copy file="${jars}/appedo_data_aggregation_${1}.jar" todir="${aggregation_jar}"/>
+		
+		<copy file="config.properties" todir="${retention_jar}"/>
+		<copy file="log4j.properties" todir="${retention_jar}"/>
+		<copy file="mail.properties" todir="${retention_jar}"/>
+		<copy todir="${retention_jar}/email" >
+			<fileset dir="email" includes="**"/>
+		</copy>
+		<copy todir="${retention_jar}/lib">
+			<fileset dir="lib"/>
+		</copy>
+		<mkdir dir="${retention_jar}/logs"/>
+		<copy file="${jars}/appedo_data_retention_${1}.jar" todir="${retention_jar}"/>
+		
+		<copy file="config.properties" todir="${sla_alert_services}"/>
+		<copy file="log4j.properties" tofile="${sla_alert_services}"/>
+		<copy todir="${sla_alert_services}/lib">
+			<fileset dir="lib"/>
+		</copy>
+		<mkdir dir="${sla_alert_services}/logs"/>
+		<copy file="${jars}/appedo_sla_alert_services_${1}.jar" todir="${sla_alert_services}"/>
+		<copy file="log4j.properties" todir="${sla_alert_services}"/>
+		<copy file="start_monitor.bat" tofile="${sla_alert_services}/start_monitor.bat"/>
+		<copy file="start_monitor.sh" tofile="${sla_alert_services}/start_monitor.sh"/>
+		
+		<copy file="config.properties" todir="${report_scheduler_services}"/>
+		<copy file="log4j.properties" tofile="${report_scheduler_services}"/>
+		<copy todir="${report_scheduler_services}/lib">
+			<fileset dir="lib"/>
+		</copy>
+		<mkdir dir="${report_scheduler_services}/logs"/>
+		<copy file="${jars}/appedo_report_scheduler_services_${1}.jar" todir="${report_scheduler_services}"/>
+		<copy file="start_monitor.bat" tofile="${report_scheduler_services}/start_monitor.bat"/>
+		<copy file="start_monitor.sh" tofile="${report_scheduler_services}/start_monitor.sh"/>
+		
+	</target>
+	
+	<target name="last_clean" depends="package">
+		<delete dir="appedo_temp/jars"/>
+		<delete dir="appedo_temp/classes"/>
+	</target>
+</project>

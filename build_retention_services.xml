@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<project name="Appedo-Retention-Service" default="retention_services">
+	<path id="libpath">
+		 <fileset dir="lib">
+			<include name="**/*.jar"/>
+		 </fileset>
+	</path> 
+	
+	<target name="init">
+		<property name="src_dir" value="src/"/>
+		<property name="classes" value="appedo_temp/retention_services/classes"/>
+	</target>		
+	
+	<target name="prepare" depends="init">
+		<mkdir dir="${classes}"/>
+	</target>
+	
+	<target name="compile" depends="prepare">
+		<javac srcdir="src" destdir="${classes}" debug="true" includeantruntime="false">
+			 <classpath refid="libpath"/>
+		</javac>
+	</target>
+	
+	<target name="retention_services" depends="compile">
+		<jar jarfile="${jars}/appedo_data_retention_${1}.jar" manifest="META-INF/MANIFEST_DATA_RETENTION_SERVICES.MF">
+			<fileset dir="${classes}"/>
+		</jar>
+	</target>
+</project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="E:/deployment/DataRetentionJar_26022018/DataRetentionJar/appedo-data-retention-3.0.006.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/Appedo-Data-Retention-Services/data-retention.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/Appedo-Data-Retention-Services/META-INF/MANIFEST_DATA_RETENTION_SERVICES.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=Appedo-Data-Retention-Services/src"/>
+    </selectedElements>
+</jardesc>
